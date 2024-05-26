@@ -35,3 +35,5 @@ void loop() {
   digitalWrite(in4Pin, LOW);
   analogWrite(enbPin, 170); // 모터 B 최대 속도
 }
+
+// PS: 레지스터 비트로 변환 필요
