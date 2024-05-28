@@ -1,3 +1,15 @@
+/* 
+준비물: pixy2.1, SG90 tilt용 서보모터, MG996R pan용 서보모터, ICSP-pixy2.1 연결 케이블, VL53L1X 센서
+전기 회로 구성 방법: 1. 아두이노 우노의 ICSP(6핀)랑 pixy2.1(10핀)이랑 연결한다.
+                    2. pixy2.1의 6핀은 모터 2개를 연결할 수 있는 부분이다. SG90, MG996R 모터 1개씩 연결한다.
+                    3. pixy2.1이랑 컴퓨터랑 연결한다. 그 후로 pixymon2를 실행해 물체 하나를 학습시킨다. (학습 방법: Action/Set Signature 1을 선택해 물체를 선택한다.)
+                    4. 이러면 pixy2.1 회로 구성은 완료된다. 그 다음에 VL53L1X의 연결 방법을 설명하겠다. 
+                    5. VCC: 5V, GND: GND, SDA: A4 pin, SCL: A5 pin, XSHUT: D3 pin, GPI01: D2 pin
+                       (VL53L1X pin: Uno pin으로 표현)
+                    6. pixy2.1 근처에 VL53L1X를 설치해 거리 오차를 최대한 줄인다.
+                    7. 코드를 실행하면 pixy2.1은 물체를 추적하는 동시에 VL53L1X로 거리 측정을 한다.
+*/
+
 #include <Pixy2.h>
 #include <PIDLoop.h>
 #include <Wire.h>
@@ -72,17 +84,21 @@ void loop() {
     // VL53L1X 거리 측정
     if (vl53.dataReady()) {
       distance = vl53.distance();
+      // 거리 측정이 안 되는 경우
       if (distance == -1) {
         Serial.print(F("Couldn't get distance: "));
         Serial.println(vl53.vl_status);
-      } else {
+      } 
+      // 거리 측정이 되면 mm 단위로 Serial 모니터에 출력
+      else {
         Serial.print(F("Distance: "));
         Serial.print(distance);
         Serial.println(" mm");
       }
       vl53.clearInterrupt();
     }
-  } else {
+  } 
+  else {
     // 블록이 인식되지 않으면 팬 및 틸트 루프 리셋
     panLoop.reset();
     tiltLoop.reset();
