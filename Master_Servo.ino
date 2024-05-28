@@ -1,8 +1,12 @@
+// SPI + 서보 모터 테스트 코드
+// 서보 모터가 회전한 각도를 Master 아두이노가 값을 받아와 Serial 모니터에 출력 & Slave에 값 전달
+
 #include <SPI.h>
 #include <Servo.h>
 
 Servo servo;
 
+// 서보 모터 핀 
 const int slaveSelectPin = 10;
 
 void setup() {
@@ -15,13 +19,13 @@ void setup() {
 }
 
 void loop() {
-  // 여기에 모터의 각도를 측정하는 코드를 작성합니다.
-  // 예를 들어, 각도 값을 읽어오는 함수가 있다고 가정합니다.
-  int motorAngle = getMotorAngle(90); // 모터 각도를 읽어오는 함수
+  // 90도라는 값 전달
+  int motorAngle = getMotorAngle(90); 
   // 슬레이브에게 각도 데이터를 전송
   sendAngleToSlave(motorAngle);
   delay(1000); // 1초에 한 번씩 전송
 
+  // 0도라는 값 전달
   motorAngle = getMotorAngle(0);
   sendAngleToSlave(motorAngle);
   delay(1000);
@@ -29,9 +33,8 @@ void loop() {
 
 int getMotorAngle(int angle) {
   // 모터 각도를 측정하는 코드를 여기에 작성합니다.
-  // 예제에서는 임의의 각도를 반환합니다.
   servo.write(angle);
-  return angle; // 0도에서 360도 사이의 임의의 값
+  return angle;
 }
 
 void sendAngleToSlave(int angle) {
