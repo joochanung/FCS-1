@@ -1,3 +1,6 @@
+// 모터 A: 탱크 하부 4개의 DC 모터
+// 모터 B: Shooting 장치이지만, 이것을 과감히 없애고 비율 예정
+
 // 핀 정의
 const int enaPin = 11; // 모터 A 속도 제어 핀 (PWM)
 const int in1Pin = 10; // 모터 A 방향 제어 핀 1
@@ -30,10 +33,10 @@ void setup() {
 void loop() {
   digitalWrite(in1Pin, LOW);
   digitalWrite(in2Pin, HIGH);
-  analogWrite(enaPin, 170); // 모터 A 최대 속도
+  analogWrite(enaPin, 255); //모터 A 속도 조절
   digitalWrite(in3Pin, HIGH);
   digitalWrite(in4Pin, LOW);
-  analogWrite(enbPin, 170); // 모터 B 최대 속도
+  analogWrite(enbPin, 100); 
 }
 
 // PS: 레지스터 비트로 변환 필요
