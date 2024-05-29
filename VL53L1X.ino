@@ -18,7 +18,7 @@ void setup() {
   if (! vl53.begin(0x29, &Wire)) {
     Serial.print(F("Error on init of VL sensor: "));
     Serial.println(vl53.vl_status);
-    while (1)       delay(100);   // 프로그램 종료 방지
+    while (1)       delay(100);   // 프로그램 잘못 실행하는 것을 방지
   }
   // 초기화 완료하면 준비가 완료된 것임
   Serial.println(F("VL53L1X sensor OK!"));
@@ -30,7 +30,7 @@ void setup() {
   if (! vl53.startRanging()) {
     Serial.print(F("Couldn't start ranging: "));
     Serial.println(vl53.vl_status);
-    while (1)       delay(100);   // 프로그램 종료 방지
+    while (1)       delay(100);   // 프로그램 잘못 실행하는 것을 방지
   }
   // 거리 측정 준비가 완료된 경우
   Serial.println(F("Ranging started"));
