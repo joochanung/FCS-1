@@ -36,7 +36,7 @@ void loop() {
   analogWrite(enaPin, 255); //모터 A 속도 조절
   digitalWrite(in3Pin, HIGH);
   digitalWrite(in4Pin, LOW);
-  analogWrite(enbPin, 100); //모터 B 속도 조절
+  analogWrite(enbPin, 255); //모터 B 속도 조절
 }
 
 // PS: 레지스터 비트로 변환 필요
